@@ -1,0 +1,18 @@
+# 运行时/游戏数据（体积大，不进仓库）
+.minecraft/
+runtime/
+data/
+node_modules/
+
+# 日志与临时文件
+*.log
+*.bak
+shots/*.txt
+hs_err_pid*.log
+
+# 系统
+Thumbs.db
+.DS_Store
+
+# 本地调试截图（README 用 docs/ 下的副本）
+shots/

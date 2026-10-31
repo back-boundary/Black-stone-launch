@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>曜石启动器 · Minecraft 1.20.1</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app">
+
+  <!-- 侧栏 -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2.5 21 7.5v9L12 21.5 3 16.5v-9L12 2.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 2.5v9m0 0 9-4m-9 4-9-4" stroke="currentColor" stroke-width="1.2" opacity=".55"/></svg>
+      </div>
+      <div class="brand-text">
+        <strong>曜石启动器</strong>
+        <span>Obsidian Launcher</span>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <button class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1v-9.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        主页
+      </button>
+      <button class="nav-item" id="navVersion">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9" stroke="currentColor" stroke-width="1.2" opacity=".6"/></svg>
+        版本
+      </button>
+      <button class="nav-item" id="navLog">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5" stroke="currentColor" stroke-width="1.6"/><path d="m7 10 2.5 2L7 14m5 0h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        日志
+      </button>
+    </nav>
+
+    <div class="side-sep"></div>
+    <div class="side-label">版本列表</div>
+    <div class="ver-item">
+      <span class="dot" id="sideDot"></span>
+      <div class="ver-meta">
+        <strong>1.20.1</strong>
+        <span id="sideVerState">未安装</span>
+      </div>
+      <span class="ver-badge">正式</span>
+    </div>
+
+    <div class="side-foot">
+      <div class="hint">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.5"/><path d="M12 8v4.5m0 3.2v.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>离线模式：用户名仅在本机生效，正版服务器需正版账号。</span>
+      </div>
+      <button class="quit-btn" id="btnQuit">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 4v7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7.5 7.2a7 7 0 1 0 9 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        退出启动器
+      </button>
+    </div>
+  </aside>
+
+  <!-- 主区域 -->
+  <main class="main">
+    <header class="topbar">
+      <div class="topbar-title">
+        <h1 id="greeting">准备启动</h1>
+        <p id="subtitle">正在读取本地环境…</p>
+      </div>
+      <div class="chips">
+        <span class="chip" id="chipJava"><i class="spinner"></i>检测 Java</span>
+        <span class="chip" id="chipVer">版本未安装</span>
+      </div>
+    </header>
+
+    <div class="scroll">
+      <!-- 版本卡片 -->
+      <section class="card version-card">
+        <div class="vc-art">
+          <div class="vc-art-inner">
+            <span class="vc-tag">MINECRAFT</span>
+            <strong>1.20.1</strong>
+            <span class="vc-sub">Trails &amp; Tales</span>
+          </div>
+        </div>
+        <div class="vc-body">
+          <div class="vc-head">
+            <h2>Minecraft 1.20.1</h2>
+            <span class="tag">正式版</span>
+          </div>
+          <p class="vc-desc" id="verDesc">尚未安装。需要下载客户端、依赖库与游戏资源（约 500 MB），并自动准备 Java 17 运行时。</p>
+
+          <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
+          <div class="meter-meta">
+            <span id="meterText">未安装</span>
+            <span id="meterRight"></span>
+          </div>
+
+          <div class="row-btns">
+            <button class="btn ghost" id="btnInstall">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 4v10m0 0 4-4m-4 4-4-4M5 18.5h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              下载并安装
+            </button>
+            <button class="btn ghost" id="btnJava" hidden>
+              <svg viewBox="0 0 24 24" fill="none"><path d="M8 17c-1.8.6-1.5 1.6.6 1.9 2.6.4 6.6.3 8.6-.4M9 13.6c-1.6.5-1.3 1.4.5 1.7 2.3.3 5.6.2 7.3-.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.5 4c2 2-2.6 3.2-2 5.2.4 1.3 2 2 2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              安装 Java 17
+            </button>
+            <button class="btn ghost subtle" id="btnRedetect">重新检测</button>
+          </div>
+
+          <div class="src-row">
+            <span>下载源</span>
+            <select id="source">
+              <option value="auto">自动（国内镜像优先，推荐）</option>
+              <option value="mirror">仅国内镜像 BMCLAPI</option>
+              <option value="official">仅官方源 Mojang</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- 账号 -->
+      <section class="card player-card">
+        <div class="avatar" id="avatar">
+          <span id="avatarFallback">?</span>
+          <img id="avatarImg" alt="" hidden />
+        </div>
+        <div class="player-body">
+          <label class="field-label" for="username">游戏用户名</label>
+          <div class="field">
+            <input id="username" type="text" maxlength="16" placeholder="输入 3-16 位英文/数字/下划线" spellcheck="false" autocomplete="off" />
+            <span class="field-hint" id="userHint">离线登录</span>
+          </div>
+          <div class="uuid-line">离线 UUID：<code id="uuidText">—</code></div>
+        </div>
+        <div class="mem-block">
+          <div class="mem-head">
+            <span>分配内存</span>
+            <strong id="memValue">2 GB</strong>
+          </div>
+          <input id="memory" type="range" min="512" max="8192" step="512" value="2048" />
+          <div class="mem-scale"><span>512M</span><span>8G</span></div>
+        </div>
+      </section>
+
+      <!-- 启动 -->
+      <button class="btn launch" id="btnLaunch">
+        <span class="launch-glow"></span>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M8 5.5v13l11-6.5-11-6.5Z" fill="currentColor"/></svg>
+        <span id="launchText">启动游戏</span>
+      </button>
+    </div>
+
+    <!-- 控制台 -->
+    <section class="console" id="consoleBox">
+        <div class="console-head">
+          <div class="console-title">
+            <span class="live" id="liveDot"></span>
+            <strong>运行日志</strong>
+          </div>
+          <div class="console-actions">
+            <button id="btnCopy" class="mini">复制</button>
+            <button id="btnClear" class="mini">清空</button>
+          </div>
+        </div>
+        <div class="log" id="log">
+          <div class="log-line muted">等待操作…</div>
+        </div>
+      </section>
+  </main>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+<script src="app.js"></script>
+</body>
+</html>

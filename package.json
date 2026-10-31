@@ -1,0 +1,12 @@
+{
+  "name": "yaoshi-launcher",
+  "version": "1.0.0",
+  "description": "曜石启动器 - 轻量 Minecraft 1.20.1 启动器（离线登录，自动下载游戏与 Java）",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "private": true
+}
